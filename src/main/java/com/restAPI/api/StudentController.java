@@ -1,34 +1,26 @@
 package com.restAPI.api;
 
 import com.restAPI.model.Students;
-import com.restAPI.repository.UserRepository;
 import com.restAPI.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class StudentController {
 
-    @Autowired
     StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/")
     public String hello() {
         return "Hello World";
     }
 
-    @GetMapping("/private")
-    public String privatePage(Authentication authentication) {
-        return "Private" + authentication.getName();
-    }
 
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/student")
